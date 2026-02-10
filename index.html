@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Wife Prasu ❤️</title>
+    <style>
+        body { 
+            background-color: #ffeef2; 
+            background-image: url('https://www.transparenttextures.com/patterns/heart.png');
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            text-align: center; 
+            color: #d63384; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh;      
+            margin: 0; 
+            overflow: hidden;
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            width: 85%; 
+            max-width: 400px; 
+        }
+        .hidden { display: none !important; }
+        button { 
+            background: #ff4d6d; 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            margin: 10px; 
+            transition: 0.3s; 
+        }
+        .gift-box { 
+            border: 2px dashed #ff4d6d; 
+            padding: 15px; 
+            margin: 10px 0; 
+            cursor: pointer; 
+            border-radius: 10px; 
+            background: #fff5f7;
+            font-weight: bold;
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            margin-top: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            object-fit: cover;
+        }
+        .active-slide { display: block; }
+        #giftDisplay {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff0f3;
+            border-radius: 10px;
+            border: 1px solid #ff4d6d;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="screen1" class="container">
+        <h2>Hi Love! ❤️</h2>
+        <p>Ready for a sweet Valentine's challenge Budi?</p>
+        <button onclick="showScreen('screen2')">Yes!</button>
+        <button id="noBtn" onmouseover="moveNo()">No</button>
+    </div>
+
+    <div id="screen2" class="container hidden">
+        <h2>Love Question 🌹</h2>
+        <p>Will you be my Valentine forever Sathi?</p>
+        <button onclick="showScreen('success')">Yes!</button>
+        <button onclick="alert('No is not an option Chudel! 😉')">No</button>
+    </div>
+
+    <div id="success" class="container hidden">
+        <h2>Success! 💖</h2>
+        <p>Pick a gift to open:</p>
+        <div class="gift-box" onclick="showGift('letter')">🎁 Gift 1: A Letter</div>
+        <div class="gift-box" onclick="showGift('promise')">🎁 Gift 2: My Promise</div>
+        <div class="gift-box" onclick="showGift('memories')">🎁 Gift 3: Our Memories</div>
+        
+        <div id="giftDisplay" class="hidden">
+            <div id="giftContent"></div>
+            <button onclick="hideGift()" style="font-size: 12px;">Back to Gifts</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+
+        const giftData = {
+            letter: `<h3>My Dearest Wife,</h3><p style="text-align:left; font-size:14px;">You are my heart and soul. Every moment with you is a treasure I keep forever. Happy Valentine's Day Prasu! ❤️</p>`,
+            
+            promise: `<h3>My Promise</h3><ul style="text-align:left; font-size:14px;"><li>I promise to love you more every day.</li><li>I promise to always be your support.</li><li>I promise to keep us happy forever.</li></ul>`,
+            
+            memories: `<h3>Our Memories 📸</h3>
+                      <div class="slider-container">
+                          <img src="photo1.jpg" class="slide active-slide">
+                          <img src="photo2.jpg" class="slide">
+                          <img src="photo3.jpg" class="slide">
+                          <img src="photo4.jpg" class="slide">
+                          <img src="photo5.jpg" class="slide">
+                          <img src="photo6.jpg" class="slide">
+                          <img src="photo7.jpg" class="slide">
+                          <img src="photo8.jpg" class="slide">
+                          <img src="photo9.jpg" class="slide">
+                          <img src="photo10.jpg" class="slide">
+                      </div>
+                      <div style="margin-top:10px;">
+                          <button onclick="changeSlide(-1)">❮</button>
+                          <span id="slideNum">1 / 10</span>
+                          <button onclick="changeSlide(1)">❯</button>
+                      </div>`
+        };
+
+        function showScreen(id) {
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function showGift(type) {
+            document.getElementById('giftContent').innerHTML = giftData[type];
+            document.getElementById('giftDisplay').classList.remove('hidden');
+            currentSlide = 0;
+        }
+
+        function hideGift() { document.getElementById('giftDisplay').classList.add('hidden'); }
+
+        function changeSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide].classList.remove('active-slide');
+            currentSlide = (currentSlide + n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active-slide');
+            document.getElementById('slideNum').innerText = (currentSlide + 1) + " / " + slides.length;
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            btn.style.position = 'fixed'; // Changed to fixed to ensure it jumps anywhere on screen
+            btn.style.left = Math.random() * 80 + '%';
+            btn.style.top = Math.random() * 80 + '%';
+        }
+    </script>
+</body>
+</html>
+cript>
+</body>
+</html>
+
+
